@@ -20,7 +20,8 @@ DESPLEGAR LA APLICACION
 3. Ejecutar los scripts de BBDD juegosolimpicos_ddl.sql y function_valor_no_null_ciudad.sql situados en la carpeta scripts.
 4. Instalar entorno Eclipse, Maven y Tomcat.
 5. Abrir Eclipse y configurar Maven y servidor Tomcat.
-6. Descomprimir el zip del proyecto en el workspace de Eclipse e importar proyecto maven o, clonar el repositorio de github.
+6. Descomprimir el zip del proyecto en el workspace de Eclipse e importar proyecto maven o, clonar el repositorio de GitHub con 
+url: https://github.com/angelfelipereturns/jjoo
 7. Una vez el proyecto esté constriudo añadirlo al servidor Tomcat configurado.
 8. Arrancar el servidor Tomcat y abrir un navegador para acceder a la aplicación en: http://localhost:8080/jjoo
 9. Para acceder al servicio REST de resumen de sedes la url es: http://localhost:8080/jjoo/resumensedes
@@ -34,8 +35,8 @@ versiones de las dependencias del proyecto en Maven, así como para poder ser m�
 3. La arquitectura se divide según la utilidad de las clases siendo la estructura de los paquetes la siguiente:
 Dentro de src/main/java:
 - com.afaf.jjoo --> clases de inicialización de la aplicación con Spring Boot: 
-JjooApplication.java que contiene el método main para correr la aplicación.
-ServletInitializer.java que contiene el método configure para dar al contexto de la aplicación los recursos.
+	JjooApplication.java que contiene el método main para correr la aplicación.
+	ServletInitializer.java que contiene el método configure para dar al contexto de la aplicación los recursos.
 - com.afaf.jjoo.controller --> clases para controlar las peticiones http a la aplicación y unirlas con el backend.
 - com.afaf.jjoo.data --> clases e interfaces con lógica de acceso a datos.
 - com.afaf.jjoo.data.mapper --> clases para instanciar RowMapper necesarias para JDBCTemplate de acceso a datos.
@@ -50,7 +51,9 @@ Dentro de src/main/resources:
 Dentro de src/test/java:
 - com.afaf.jjoo --> JjooApplicationTests.java: test para la clase de inicialización.
 - com.afaf.jjoo.test --> ResumenSedesDaoTests.java: test para la clase de ResumenSedesDao.
-**** Para un mayor de detalle acceder al javadoc de la aplicación situado en la carpeta doc y ejecutar index.html en el navegador.
+----------------------------------------------------------------------------------------------------------------------------- 
+Para un mayor de detalle acceder al javadoc de la aplicación situado en la carpeta doc y ejecutar index.html en el navegador.
+-----------------------------------------------------------------------------------------------------------------------------
 3. En el acceso a la BBDD se ha utilizado tanto JDBCTemplate como JPARepositoy de Spring Data.
 4. Para la lógica de negocio y control de peticiones http se ha utilizado Spring Core y Spring Web.
 5. En la realización de los test se ha utilizado la implementación JUnit de Spring.

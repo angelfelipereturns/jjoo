@@ -27,8 +27,8 @@ public class ResumenSedesDaoTests {
 	private ResumenSedesDao resumenSedesDao;
 	
 	@Test
-    @Transactional
-    @Rollback(true)
+	@Transactional
+	@Rollback(true)
 	public void listaResumenSedesTest() {
 		ResumenSedes resumenSedes = new ResumenSedes(3, "FRANCIA", 8, "PARIS", 5, "VERANO", 2);
 		List<ResumenSedes> list = resumenSedesDao.listaResumenSedes();

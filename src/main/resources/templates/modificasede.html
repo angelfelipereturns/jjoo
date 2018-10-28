@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Modificar Sede JJOO</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h2>Sede JJOO AFAF</h2>
+			<form class="formSede" method="POST" th:action="@{/modificasede}">
+				<h6>(*) campo obligatorio</h6>
+				<br/>
+				<div class="form-group row">
+					<label for="ciudad.nombreCiudad" class="col-sm-1-12 col-form-label">Nombre Ciudad: *</label>
+					<div class="col-sm-1-12">
+						<input type="text" class="form-control" name="ciudad.nombreCiudad" id="ciudad.nombreCiudad" maxlength="64" required="required" th:value="${sede.ciudad.nombreCiudad}">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="ciudad.valor_ciudad" class="col-sm-1-12 col-form-label">Valor Ciudad:</label>
+					<div class="col-sm-1-12">
+						<input type="number" class="form-control" name="ciudad.valor_ciudad" id="ciudad.valor_ciudad" min="1" max="99999" th:value="${sede.ciudad.valor_ciudad}">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="ciudad.pais.nombrePais" class="col-sm-1-12 col-form-label">Nombre País: *</label>
+					<div class="col-sm-1-12">
+						<input type="text" class="form-control" name="ciudad.pais.nombrePais" id="ciudad.pais.nombrePais" maxlength="64" required="required" th:value="${sede.ciudad.pais.nombrePais}">
+					</div>
+				</div><div class="form-group row">
+					<label for="ciudad.pais.codigo_pais" class="col-sm-1-12 col-form-label">Código País: *</label>
+					<div class="col-sm-1-12">
+						<input type="text" class="form-control" name="ciudad.pais.codigo_pais" id="ciudad.pais.codigo_pais" maxlength="2" required="required" th:value="${sede.ciudad.pais.codigo_pais}">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="ciudad.pais.valor_pais" class="col-sm-1-12 col-form-label">Valor País: *</label>
+					<div class="col-sm-1-12">
+						<input type="number" class="form-control" name="ciudad.pais.valor_pais" id="ciudad.pais.valor_pais" required="required" min="1" max="99999" th:value="${sede.ciudad.pais.valor_pais}">
+					</div>
+				</div>
+                <input type="hidden" th:value="${sede.sedeJjooPK.toString()}" name="toStringSedeJjooPK" />
+				<div class="form-group row">
+					<div class="offset-sm-2 col-sm-10">
+						<button id="modificar" type="submit" class="btn btn-primary">Modificar</button>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="offset-sm-2 col-sm-10">
+						<button id="volver" type="button" class="btn btn-alert">&nbsp;&nbsp;Volver&nbsp;</button>
+					</div>
+				</div>
+			</form>
+		</div>
+        
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script th:src="@{/js/funcionesjs.js}"></script>
+	</body>
+</html>

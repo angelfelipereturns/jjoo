@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Home Sedes JJOO</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h2>Sedes JJOO AFAF</h2>
+			<ul class="list-group" th:each="sede : ${sedes}">
+				<li class="list-group-item">
+					<div class="div-info-sede">
+						Sede: <span th:text="${sede.ciudad.nombreCiudad}"></span> - 
+						Tipo: <span th:text="${sede.tipojjoo.descripcion_tipo}"></span> - 
+						Año: <span th:text="${sede.sedeJjooPK.anio}"></span>
+					</div> 
+					<form method="POST" class="formOpcion">
+						<input type="hidden" th:value="${sede.sedeJjooPK.toString()}" name="toStringSedeJjooPK" />
+						<input type="hidden" th:value="borrar" name="opcion" />
+						<button type="submit" class="btn btn-alert btn-borrar">Borrar</button>
+					</form>
+					<form method="POST" class="formOpcion">
+						<input type="hidden" th:value="${sede.sedeJjooPK.toString()}" name="toStringSedeJjooPK" />
+						<input type="hidden" th:value="modificar" name="opcion" />
+						<button type="submit" class="btn btn-alert btn-modificar">Modificar</button>
+					</form>
+				</li>
+			</ul>
+			<div class="div-btn-nuevo">
+				<a id="nuevo" class="btn btn-primary" th:href="@{/nuevasede}" role="button">Nueva Sede</a>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script th:src="@{/js/funcionesjs.js}"></script>
+	</body>
+</html>

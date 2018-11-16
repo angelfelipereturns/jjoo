@@ -17,7 +17,7 @@ DESPLEGAR LA APLICACION
 -----------------------
 1. Instalar la BBDD de MySQL en localhost con puerto 3306 y usuario=root y password=root.
 2. Abrir MySQL y ejecutar el servicio de servidor de BBDD MySQL.
-3. Ejecutar los scripts de BBDD juegosolimpicos_ddl.sql,  function_valor_no_null_ciudad.sql y table_hibernate_sequence.sql situados en la carpeta scripts.
+3. Ejecutar los scripts de BBDD juegosolimpicos_ddl.sql y table_hibernate_sequence.sql situados en la carpeta scripts.
 4. Instalar entorno Eclipse, Maven y Tomcat.
 5. Abrir Eclipse y configurar Maven y servidor Tomcat.
 6. Descomprimir el zip del proyecto en el workspace de Eclipse e importar proyecto maven o, clonar el repositorio de GitHub con 

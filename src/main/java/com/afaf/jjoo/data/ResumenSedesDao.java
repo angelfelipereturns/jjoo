@@ -37,7 +37,7 @@ public class ResumenSedesDao {
 		this.consultaResumenSedes = "select "
 										+ "p.id_pais, p.nombre_pais, "
 										+ "c.id_ciudad, c.nombre_ciudad, "
-										+ "valor_no_null (c.id_ciudad) as valor, "
+										+ "ifnull(c.valor_ciudad, p.valor_pais) as valor, "
 										+ "t.descripcion_tipo as descripcion_tipo_jjoo, "
 										+ "count(s.sede) as numero_veces_sede " + 
 									"from "

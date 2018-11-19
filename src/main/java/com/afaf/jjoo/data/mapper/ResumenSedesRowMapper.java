@@ -17,17 +17,22 @@ public class ResumenSedesRowMapper {
 	
 	/**
 	 * Constructor para instanciar el objeto RowMapper<ResumenSedes>
+	 * @throws SQLException 
 	 */
-	public ResumenSedesRowMapper() {
-		rowMapper = new RowMapper<ResumenSedes>() {
-			@Override
-			public ResumenSedes mapRow(ResultSet rs, int rowNum) throws SQLException {
-				ResumenSedes resumenSedes = new ResumenSedes(rs.getInt(1), rs.getString(2), 
-						rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getInt(7));
-				return resumenSedes;
-			}
-			
-		};
+	public ResumenSedesRowMapper() throws SQLException {
+		try {
+			rowMapper = new RowMapper<ResumenSedes>() {
+				@Override
+				public ResumenSedes mapRow(ResultSet rs, int rowNum) throws SQLException {
+					ResumenSedes resumenSedes = new ResumenSedes(rs.getInt(1), rs.getString(2), 
+							rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getInt(7));
+					return resumenSedes;
+				}
+				
+			};
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
 	}
 	
 	/**

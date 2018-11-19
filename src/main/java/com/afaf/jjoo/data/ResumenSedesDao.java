@@ -1,8 +1,10 @@
 package com.afaf.jjoo.data;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +27,10 @@ public class ResumenSedesDao {
 	/**
 	 * Metodo para obtener de la BBDD la lista de resumen de sedes	
 	 * @return lista de resumen de sedes
+	 * @throws SQLException 
+	 * @throws DataAccessException 
 	 */
-	public List<ResumenSedes> listaResumenSedes(){
+	public List<ResumenSedes> listaResumenSedes() throws DataAccessException, SQLException{
 		List<ResumenSedes> listaResumenSedes = jdbc.query(this.consultaResumenSedes(), 
 				new ResumenSedesRowMapper().getRowMapper());
 		return listaResumenSedes;

@@ -2,12 +2,15 @@ package com.afaf.jjoo.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +34,12 @@ public class ResumenSedesDaoTests {
 	@Rollback(true)
 	public void listaResumenSedesTest() {
 		ResumenSedes resumenSedes = new ResumenSedes(3, "FRANCIA", 8, "PARIS", 5, "VERANO", 2);
-		List<ResumenSedes> list = resumenSedesDao.listaResumenSedes();
+		List<ResumenSedes> list = new ArrayList<ResumenSedes>();
+		try {
+			list = resumenSedesDao.listaResumenSedes();
+		} catch (DataAccessException | SQLException e) {
+			e.printStackTrace();
+		}
 		assertEquals(resumenSedes.getClass(), list.get(0).getClass());
 	}
 

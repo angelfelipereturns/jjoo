@@ -1,9 +1,12 @@
 package com.afaf.jjoo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,8 @@ public class JjooController {
 	@Autowired
 	private JjooService jjooService;
 	
+	final static Logger logger = LoggerFactory.getLogger(JjooController.class);
+	
 	
 	/**
 	 * Metodo para controlar la carga de la pagina home obteniendo la lista de sedes de jjoo
@@ -36,7 +41,12 @@ public class JjooController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView();
-		List<SedeJjoo> listaSedesJjoo = jjooService.listaSedesJjoo();
+		List<SedeJjoo> listaSedesJjoo = new ArrayList<SedeJjoo>();
+		try {
+			listaSedesJjoo = jjooService.listaSedesJjoo();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 		modelAndView.addObject("sedes", listaSedesJjoo);
 		modelAndView.setViewName("home");
 		return modelAndView;
@@ -49,7 +59,13 @@ public class JjooController {
 	@RequestMapping(value="/nuevasede", method=RequestMethod.GET)
 	public ModelAndView nuevoContacto() {
 		ModelAndView modelAndView = new ModelAndView();
-		List<TipoJjoo> listaTipoJjoo = jjooService.listaTipoJjoo();
+		List<TipoJjoo> listaTipoJjoo = new ArrayList<TipoJjoo>();
+		try {
+			listaTipoJjoo = jjooService.listaTipoJjoo();
+		} catch (Exception e) {
+			listaTipoJjoo.add(new TipoJjoo(99, "error al cargar el tipo de jjjoo", null));
+			logger.error(e.getMessage());
+		}
 		modelAndView.addObject("tipos", listaTipoJjoo);
 		modelAndView.setViewName("nuevasede");
 		return modelAndView;
@@ -68,8 +84,13 @@ public class JjooController {
 			modelAndView.setViewName("nuevasede");
 		}
 		else {
-			jjooService.salvaSede(sedeJjoo);
-			modelAndView.setViewName("redirect:/");
+			try {
+				jjooService.salvaSede(sedeJjoo);
+				modelAndView.setViewName("redirect:/");
+			} catch (Exception e) {
+				modelAndView.setViewName("redirect:/error");
+				logger.error(e.getMessage());
+			}
 		}
 		return modelAndView;
 	}
@@ -84,17 +105,22 @@ public class JjooController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ModelAndView opcionSede(@RequestParam String toStringSedeJjooPK, @RequestParam String opcion) {
 		ModelAndView modelAndView = new ModelAndView();
-		String anio = toStringSedeJjooPK.substring(0, toStringSedeJjooPK.indexOf("/"));
-		String id_tipo_jjoo = toStringSedeJjooPK.substring(toStringSedeJjooPK.indexOf("/")+1, toStringSedeJjooPK.length());
-		SedeJjooPK sedeJjooPK = new SedeJjooPK(Integer.parseInt(anio), Integer.parseInt(id_tipo_jjoo));
-		if("modificar".equals(opcion)) {
-			SedeJjoo sedeJjoo = jjooService.getSede(sedeJjooPK);
-			modelAndView.addObject("sede", sedeJjoo);
-			modelAndView.setViewName("modificasede");
-		}
-		else if("borrar".equals(opcion)) {
-			jjooService.borrarSede(sedeJjooPK);
-			modelAndView.setViewName("redirect:/");
+		try {
+			String anio = toStringSedeJjooPK.substring(0, toStringSedeJjooPK.indexOf("/"));
+			String id_tipo_jjoo = toStringSedeJjooPK.substring(toStringSedeJjooPK.indexOf("/")+1, toStringSedeJjooPK.length());
+			SedeJjooPK sedeJjooPK = new SedeJjooPK(Integer.parseInt(anio), Integer.parseInt(id_tipo_jjoo));
+			if("modificar".equals(opcion)) {
+				SedeJjoo sedeJjoo = jjooService.getSede(sedeJjooPK);
+				modelAndView.addObject("sede", sedeJjoo);
+				modelAndView.setViewName("modificasede");
+			}
+			else if("borrar".equals(opcion)) {
+				jjooService.borrarSede(sedeJjooPK);
+				modelAndView.setViewName("redirect:/");
+			}
+		} catch (Exception e) {
+			modelAndView.setViewName("redirect:/error");
+			logger.error(e.getMessage());
 		}
 		return modelAndView;
 	}
@@ -117,8 +143,13 @@ public class JjooController {
 			String id_tipo_jjoo = toStringSedeJjooPK.substring(toStringSedeJjooPK.indexOf("/")+1, toStringSedeJjooPK.length());
 			SedeJjooPK sedeJjooPK = new SedeJjooPK(Integer.parseInt(anio), Integer.parseInt(id_tipo_jjoo));
 			sedeJjoo.setSedeJjooPK(sedeJjooPK);
-			jjooService.salvaSede(sedeJjoo);
-			modelAndView.setViewName("redirect:/");
+			try {
+				jjooService.salvaSede(sedeJjoo);
+				modelAndView.setViewName("redirect:/");
+			} catch (Exception e) {
+				modelAndView.setViewName("redirect:/error");
+				logger.error(e.getMessage());
+			}
 		}
 		return modelAndView;
 	}
